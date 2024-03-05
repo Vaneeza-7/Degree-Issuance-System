@@ -13,6 +13,11 @@ The Degree Issuance System is designed to streamline the process of degree gener
 - **Objection Alerts:** Inform students about any objections from FYP or Finance departments that might prevent degree issuance.
 - **Reporting and Analytics:** Generate reports on degree and request statistics for insights into patterns and system efficiency.
 
+## Authors
+- [Vaneeza](https://github.com/Vaneeza-7)
+- [Momina Khalid](https://github.com/MominaKhalid15)
+- [Fizza Mumtaz](https://github.com/FizzaMumtaz)
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
