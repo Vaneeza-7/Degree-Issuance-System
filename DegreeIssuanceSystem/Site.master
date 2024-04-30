@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            color: white;
+        }
+
+        .nav-link:hover {
+            color: #808080;
+        }
+
+        .nav-link.active {
+            color: white;
+        }
+
+
+        </style>
+    <style type="text/css">
+        #form1 {
+            height: 913px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <h2 style="color:white; margin-left:10px">Dashboard</h2>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="AdminDashboard.aspx">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Requests.aspx">Manage Requests</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Requests.aspx">Manage Complaints</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Requests.aspx">Student Academic Records</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Requests.aspx">Issue Degree</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="Requests.aspx">Issue Transcript</a>
+                        </li>
+                         <li>
+                            <a class="nav-link" href="Requests.aspx">Logout</a>
+                        </li>
+                        <!-- Add other navigation items if needed -->
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
