@@ -5,8 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-public partial class ManageRequests : System.Web.UI.Page
+public partial class ManageComplaints : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,7 +18,7 @@ public partial class ManageRequests : System.Web.UI.Page
     private void BindGrid()
     {
         DBHandler dataAccess = new DBHandler();
-        GridView1.DataSource = dataAccess.GetRequests();
+        GridView1.DataSource = dataAccess.GetComplaints();
         GridView1.DataBind();
     }
 
@@ -38,5 +37,4 @@ public partial class ManageRequests : System.Web.UI.Page
             }
         }
     }
-
 }

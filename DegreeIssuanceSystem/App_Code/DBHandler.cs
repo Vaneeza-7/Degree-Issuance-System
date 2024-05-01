@@ -303,4 +303,73 @@ public class DBHandler
         }
         return dt;
     }
+
+    public DegreeRequest GetRequestDetails(string token)
+    {
+        DegreeRequest degreeRequest = new DegreeRequest(token);
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM DegreeRequests WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            degreeRequest.Token = reader["Token"].ToString();
+                            degreeRequest.DateReceived = Convert.ToDateTime(reader["DateReceived"]);
+                            degreeRequest.Status = reader["Status"].ToString();
+                            degreeRequest.AdminApproved = Convert.ToBoolean(reader["AdminApproved"]);
+                            degreeRequest.FYPApproved = Convert.ToBoolean(reader["FYPApproved"]);
+                            degreeRequest.FinanceApproved = Convert.ToBoolean(reader["FinanceApproved"]);
+                            degreeRequest.StudentID = Convert.ToInt32(reader["UserID"]);
+                            degreeRequest.AdminComments = reader["AdminComments"].ToString();
+                            degreeRequest.FYPComments = reader["FYPComments"].ToString();
+                            degreeRequest.FinanceComments = reader["FinanceComments"].ToString();
+                        }
+                    }
+                    con.Close();
+                    return degreeRequest;
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            // Handle SQL-specific errors
+            Console.WriteLine("A SQL error occurred: " + ex.Message);
+            return null;
+
+        }
+        catch (Exception ex)
+        {
+            // Handle general errors
+            Console.WriteLine("An error occurred: " + ex.Message);
+            return null;
+        }   
+    }
+
+    public DataTable GetComplaints()
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            string query = "SELECT * FROM StudentComplaints";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            con.Open();
+            adapter.Fill(dt);
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            // Handle exception
+            Console.WriteLine(ex.Message);
+        }
+        return dt;
+    }
 }

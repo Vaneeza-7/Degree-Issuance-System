@@ -64,7 +64,7 @@
                             <a class="nav-link" href="ManageRequests.aspx">Manage Requests</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Requests.aspx">Manage Complaints</a>
+                            <a class="nav-link" href="ManageComplaints.aspx">Manage Complaints</a>
                         </li>
                         <li>
                             <a class="nav-link" href="Requests.aspx">Student Academic Records</a>

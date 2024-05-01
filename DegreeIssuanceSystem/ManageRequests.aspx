@@ -11,7 +11,7 @@
         </div>
 
         <div class="container mt-5">
-            <asp:GridView ID="GridView1" border-color=black runat="server" CssClass="table table-hover" AutoGenerateColumns="False">
+            <asp:GridView ID="GridView1" border-color=black runat="server" CssClass="table table-hover" AutoGenerateColumns="False"  OnRowCommand="GridView1_RowCommand">
             <HeaderStyle BackColor="#343a40" ForeColor="White" />
             <Columns>
                 <asp:BoundField DataField="Token" HeaderText="Token" SortExpression="Token" />
@@ -35,11 +35,10 @@
                  <asp:BoundField DataField="UserID" HeaderText="Student ID" SortExpression="UserID" />
                 <asp:TemplateField HeaderText="Actions">
                     <ItemTemplate>
-                        <asp:Button ID="btnViewDetails" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Eval("UserID") %>' CssClass="btn btn-dark btn-sm" />
+                        <asp:Button ID="btnViewDetails" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Eval("Token") + "," + Eval("UserID") %>' CssClass="btn btn-dark btn-sm" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
-             
             </asp:GridView>
         </div>
 
