@@ -36,4 +36,9 @@ public class AdminClass
         return dbHandler.signInAdmin(Email, Password);
 
     }
+
+    public AdminClass getAdminDetails(String email, String pwd)
+    {
+        return dbHandler.GetAdmin(email, pwd);
+    }
 }

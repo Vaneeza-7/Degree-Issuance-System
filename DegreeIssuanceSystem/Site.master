@@ -32,6 +32,14 @@
             color: white;
         }
 
+    #GridView1 {
+        border-color: black !important; /* Ensures borders are black */
+    }
+
+    #GridView1 th, #GridView1 td {
+        border-color: black !important; /* Ensures internal borders are also black */
+    }
+
 
         </style>
     <style type="text/css">
@@ -53,7 +61,7 @@
                             <a class="nav-link" href="AdminDashboard.aspx">Home</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Requests.aspx">Manage Requests</a>
+                            <a class="nav-link" href="ManageRequests.aspx">Manage Requests</a>
                         </li>
                         <li>
                             <a class="nav-link" href="Requests.aspx">Manage Complaints</a>

@@ -14,14 +14,17 @@ public partial class AdminLogin : System.Web.UI.Page
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        string enteredUsername = email.Text.Trim();
+        string enteredUseremail = email.Text.Trim();
         string enteredPassword = password.Text.Trim();
 
         // Example validation
-        if (!string.IsNullOrEmpty(enteredUsername) && !string.IsNullOrEmpty(enteredPassword))
+        if (!string.IsNullOrEmpty(enteredUseremail) && !string.IsNullOrEmpty(enteredPassword))
         {
-            // Logic for a successful login
-            AdminClass admin = new AdminClass(enteredUsername, enteredPassword);
+            HttpCookie userEmailCookie = new HttpCookie("userEmail", enteredUseremail);
+            Response.Cookies.Add(userEmailCookie);
+            HttpCookie userpwdCookie = new HttpCookie("userPwd", enteredPassword);
+            Response.Cookies.Add(userpwdCookie);
+            AdminClass admin = new AdminClass(enteredUseremail, enteredPassword);
             bool loginSuccess = admin.signIn();
             if (loginSuccess)
             {

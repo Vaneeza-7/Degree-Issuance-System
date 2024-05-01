@@ -26,7 +26,7 @@
                 <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Names="Times New Roman" Font-Size="Medium" Text="User ID :"></asp:Label>
 &nbsp;&nbsp;&nbsp;<asp:Label ID="Label18" runat="server"></asp:Label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Names="Times New Roman" Font-Size="Medium" Text="User Name: "></asp:Label>
+                <asp:Label ID="Label6" runat="server" Font-Bold="True" Font-Names="Times New Roman" Font-Size="Medium" Text="Designation: "></asp:Label>
                 <asp:Label ID="Label20" runat="server" style="margin-left: 18px" ForeColor="Black"></asp:Label>
             </p>
         </div>

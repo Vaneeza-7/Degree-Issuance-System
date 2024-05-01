@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+
+public partial class ManageRequests : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            BindGrid();
+        }
+    }
+
+    private void BindGrid()
+    {
+        DBHandler dataAccess = new DBHandler();
+        GridView1.DataSource = dataAccess.GetRequests();
+        GridView1.DataBind();
+    }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "ViewDetails")
+        {
+            string id = e.CommandArgument.ToString();
+            
+            Response.Redirect("RequestDetails.aspx?id=" + id);
+        }
+    }
+
+}
