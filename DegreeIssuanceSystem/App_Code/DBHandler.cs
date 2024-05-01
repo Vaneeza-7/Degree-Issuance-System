@@ -1,285 +1,192 @@
 ﻿using System;
-using System.Activities;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for DBHandler
-/// </summary>
 public class DBHandler
 {
-    string connectionString = "Data Source=DESKTOP-D3DRLR7\\SQLEXPRESS;Initial Catalog=onestop;Integrated Security=True;TrustServerCertificate=True;";
-    public DBHandler()
-    {
-    }
+    string connectionString = "Data Source=DESKTOP-PAN5U9D\\SQLEXPRESS01;Initial Catalog=onestop;Integrated Security=True;TrustServerCertificate=True;";
 
-    public bool signInAdmin(string email, string password)
+    public DBHandler() { }
+
+    public bool SignInAdmin(string email, string password)
     {
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Admins WHERE Email = @email AND Password = @password", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Admins WHERE Email = @Email AND Password = @Password", con))
                 {
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
 
                     con.Open();
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (result > 0)
-                    {
-                        // Logic for successful authentication
-                        return true;
-                    }
-                    else
-                    {
-                        // Logic for failed authentication
-                        return false;
-                    }
+                    return result > 0;
                 }
-                con.Close();
             }
-
-        }
-        catch (SqlException ex)
-        {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return false;
-
         }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
+            // Handle exceptions
             return false;
         }
-
-
     }
 
-    public bool signInStudent(string email, string password)
+    public bool SignInStudent(string email, string password)
     {
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Students WHERE Email = @email AND Password = @password", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Students WHERE Email = @Email AND Password = @Password", con))
                 {
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
 
                     con.Open();
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (result > 0)
-                    {
-                        // Logic for successful authentication
-                        return true;
-                    }
-                    else
-                    {
-                        // Logic for failed authentication
-                        return false;
-                    }
+                    return result > 0;
                 }
-                con.Close();
             }
-
-        }
-        catch (SqlException ex)
-        {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return false;
-
         }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
+            // Handle exceptions
             return false;
         }
     }
 
-    public bool signInDirector(string email, string password)
+    public bool SignInDirector(string email, string password)
     {
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Directors WHERE Email = @email AND Password = @password", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Directors WHERE Email = @Email AND Password = @Password", con))
                 {
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
 
                     con.Open();
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (result > 0)
-                    {
-                        // Logic for successful authentication
-                        return true;
-                    }
-                    else
-                    {
-                        // Logic for failed authentication
-                        return false;
-                    }
+                    return result > 0;
                 }
-                con.Close();
             }
-
-        }
-        catch (SqlException ex)
-        {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return false;
-
         }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
+            // Handle exceptions
             return false;
         }
     }
 
-    public bool signInFinanceAccountant(string email, string password)
+    public bool SignInFinanceAccountant(string email, string password)
     {
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM FinanceAccountants WHERE Email = @email AND Password = @password", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM FinanceAccountants WHERE Email = @Email AND Password = @Password", con))
                 {
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
 
                     con.Open();
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (result > 0)
-                    {
-                        // Logic for successful authentication
-                        return true;
-                    }
-                    else
-                    {
-                        // Logic for failed authentication
-                        return false;
-                    }
+                    return result > 0;
                 }
-                con.Close();
             }
-
-        }
-        catch (SqlException ex)
-        {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return false;
-
         }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
+            // Handle exceptions
             return false;
         }
     }
 
-    public bool signInFYPDeptMembers(string email, string password)
+    public bool SignInFYPDeptMembers(string email, string password)
     {
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM FYPDeptMembers WHERE Email = @email AND Password = @password", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM FYPDeptMembers WHERE Email = @Email AND Password = @Password", con))
                 {
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Password", password);
 
                     con.Open();
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (result > 0)
-                    {
-                        // Logic for successful authentication
-                        return true;
-                    }
-                    else
-                    {
-                        // Logic for failed authentication
-                        return false;
-                    }
+                    return result > 0;
                 }
-                con.Close();
             }
-
-        }
-        catch (SqlException ex)
-        {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return false;
-
         }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
+            // Handle exceptions
             return false;
         }
     }
 
-    public AdminClass GetAdmin(string email, string password)
+    public string[] GetStudentInformation(string email)
     {
-        AdminClass admin = new AdminClass(email, password);
+        string[] studentInfo = new string[3]; // Adjust the array size based on the number of fields to retrieve
+
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Admins WHERE Email = @email", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT Name, RollNumber, Degree FROM Students WHERE Email = @Email", con))
                 {
-                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@Email", email);
 
                     con.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
                     {
-                        while (reader.Read())
-                        {
-                            admin.UserID = Convert.ToInt32(reader["UserID"]);
-                            admin.Email = reader["Email"].ToString();
-                            admin.Password = reader["Password"].ToString();
-                            admin.Name = reader["Name"].ToString();
-                            admin.Address = reader["Address"].ToString();
-                            admin.Designation = reader["Designation"].ToString();
-                        }
+                        reader.Read();
+                        studentInfo[0] = reader["Name"].ToString();
+                        studentInfo[1] = reader["RollNumber"].ToString();
+                        studentInfo[2] = reader["Degree"].ToString();
                     }
-                    con.Close();
-                    return admin;
                 }
             }
         }
-        catch (SqlException ex)
+        catch (Exception ex)
         {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return null;
+            // Handle exceptions
+        }
 
+        return studentInfo;
+    }
+
+    public bool SubmitComplaintForm(string complaint)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO ComplaintForm (Date, Status, Complaint) VALUES (GETDATE(), 'Open', @Complaint)", con))
+                {
+                    cmd.Parameters.AddWithValue("@Complaint", complaint);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
+                }
+            }
         }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
-            return null;
+            // Handle exceptions
+            return false;
         }
     }
 
@@ -337,19 +244,11 @@ public class DBHandler
                 }
             }
         }
-        catch (SqlException ex)
-        {
-            // Handle SQL-specific errors
-            Console.WriteLine("A SQL error occurred: " + ex.Message);
-            return null;
-
-        }
         catch (Exception ex)
         {
-            // Handle general errors
-            Console.WriteLine("An error occurred: " + ex.Message);
+            // Handle exceptions
             return null;
-        }   
+        }
     }
 
     public DataTable GetComplaints()
