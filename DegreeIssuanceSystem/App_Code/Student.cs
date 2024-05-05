@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Data.SqlClient;
 
-namespace projectse
-{
+
     public class Student
     {
         public string RollNumber { get; set; }
@@ -26,4 +25,3 @@ namespace projectse
             return dbHandler.GetStudentInformation(email);
         }
     }
-}

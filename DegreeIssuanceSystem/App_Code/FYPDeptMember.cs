@@ -5,7 +5,7 @@ using System.Web;
 
 namespace projectse
 {
-    public class FYPDeptMember : User
+    public class FYPDeptMember 
     {
         public void VerifyStudentFYPO() { }
     }

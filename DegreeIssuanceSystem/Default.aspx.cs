@@ -15,7 +15,7 @@ public partial class _Default :  System.Web.UI.Page
     protected void studentbtn_Click(object sender, EventArgs e)
     {
 
-        Response.Redirect("Login.aspx");
+        Response.Redirect("studentlogin.aspx");
     }
     protected void adminbtn_Click(object sender, EventArgs e)
     {

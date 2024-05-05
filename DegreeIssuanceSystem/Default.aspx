@@ -82,11 +82,14 @@
     This is a system that allows students to apply for their degree online.
         </p>
 
+        <div style="margin-left:30px">
         <asp:Button ID="studentbtn" runat="server" CssClass="button-submit" Text="Login as Student" OnClick="studentbtn_Click" />
     <asp:Button ID="adminbtn" runat="server" CssClass="button-submit" Text="Login as Admin" OnClick="adminbtn_Click" />
     <asp:Button ID="directorbtn" runat="server" CssClass="button-submit" Text="Login as Director" OnClick="directorbtn_Click" />
     <asp:Button ID="accountantbtn" runat="server" CssClass="button-submit" Text="Login as Finance Accountant" OnClick="accountantbtn_Click" />
     <asp:Button ID="fypbtn" runat="server" CssClass="button-submit" Text="Login as FYP Department Member" OnClick="fypbtn_Click" />
+        <asp:Button ID="Button1" runat="server" CssClass="button-submit" Text="Sign Up" OnClick="fypbtn_Click" />
+    </div>
         </div>
     </form>
     <footer>
