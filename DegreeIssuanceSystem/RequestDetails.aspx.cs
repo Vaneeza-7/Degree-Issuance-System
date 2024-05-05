@@ -9,11 +9,23 @@ public partial class RequestDetails : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            if (Request.Cookies["userEmail"] == null || Request.Cookies["userPwd"] == null)
+            {
+                Response.Redirect("AdminLogin.aspx");
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('An error occurred. Please login again');</script>");
+        }
+
         if (!IsPostBack)
         {
             string token = Request.QueryString["token"];
             string studentIdString = Request.QueryString["studentId"];
-            int studentId = int.Parse(studentIdString);
+            int studentId = int.TryParse(studentIdString, out studentId) ? studentId : 0;
             if (!string.IsNullOrEmpty(token))
             {
                 lblToken.Text = token;
@@ -22,7 +34,7 @@ public partial class RequestDetails : System.Web.UI.Page
             }
             else
             {
-                // Handle error: Token not provided
+                Response.Write("<script>alert('Student or token missing. Go back to Requests page');</script>");
             }
         }
     }
@@ -57,27 +69,23 @@ public partial class RequestDetails : System.Web.UI.Page
 
     protected void btnApprove_Click(object sender, EventArgs e)
     {
-        // Approve the request
+        string useremail = Request.Cookies["userEmail"].Value;
+        string userpwd = Request.Cookies["userPwd"].Value;
+        AdminClass admin = new AdminClass(useremail, userpwd);
         string comments = txtComments.Text;
-        ApproveRequest(lblToken.Text, comments);
-        // Optionally redirect or show success message
+        admin.ApproveRequest(lblToken.Text, comments);
+        Response.Redirect("ManageRequests.aspx");
     }
 
     protected void btnReject_Click(object sender, EventArgs e)
     {
-        // Reject the request
+        string useremail = Request.Cookies["userEmail"].Value;
+        string userpwd = Request.Cookies["userPwd"].Value;
+        AdminClass admin = new AdminClass(useremail, userpwd);
         string comments = txtComments.Text;
-        RejectRequest(lblToken.Text, comments);
-        // Optionally redirect or show success message
+        admin.RejectRequest(lblToken.Text, comments);
+        Response.Redirect("ManageRequests.aspx");
+
     }
 
-    private void ApproveRequest(string token, string comments)
-    {
-        // Logic to approve request
-    }
-
-    private void RejectRequest(string token, string comments)
-    {
-        // Logic to reject request
-    }
 }

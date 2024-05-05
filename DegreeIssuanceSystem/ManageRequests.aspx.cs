@@ -34,7 +34,8 @@ public partial class ManageRequests : System.Web.UI.Page
                 string token = args[0];
                 string studentId = args[1];
 
-                Response.Redirect($"RequestDetails.aspx?token={token}&studentId={studentId}");
+                // Response.Redirect($"RequestDetails.aspx?token={token}&studentId={studentId}");
+                Response.Redirect(string.Format("RequestDetails.aspx?token={0}&studentId={1}", token, studentId));
             }
         }
     }

@@ -41,4 +41,15 @@ public class AdminClass
     {
         return dbHandler.GetAdmin(email, pwd);
     }
+
+    public void ApproveRequest(string token, string comments)
+    {
+        dbHandler.ApproveRequest(token, comments);
+    }
+
+    public void RejectRequest(string token, string comments)
+    {
+        dbHandler.RejectRequest(token, comments);
+    }
+   
 }

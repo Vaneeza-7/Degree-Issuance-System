@@ -30,10 +30,12 @@ public partial class ManageComplaints : System.Web.UI.Page
             string[] args = e.CommandArgument.ToString().Split(',');
             if (args.Length == 2)
             {
-                string token = args[0];
+                string complaintID = args[0];
                 string studentId = args[1];
 
-                Response.Redirect($"RequestDetails.aspx?token={token}&studentId={studentId}");
+                // Response.Redirect($"RequestDetails.aspx?token={token}&studentId={studentId}");
+                Response.Redirect(string.Format("ComplaintDetails.aspx?complaintID={0}&studentId={1}", complaintID, studentId));
+
             }
         }
     }

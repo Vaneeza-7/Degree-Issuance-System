@@ -318,4 +318,204 @@ public class DBHandler
         }
         return dt;
     }
+
+    //admin approve request function
+    public void ApproveRequest(string token, string comments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE DegreeRequests SET AdminApproved = 1, AdminComments = @comments WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@comments", comments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update request. An error occurred: " + ex.Message);
+        }
+    }
+
+    //admin reject request function
+    public void RejectRequest(string token, string comments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE DegreeRequests SET AdminApproved = 0, AdminComments = @comments WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@comments", comments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update request. An error occurred: " + ex.Message);
+        }
+    }
+
+    //fyp department approve request function
+    public void ApproveRequestFYP(string token, string comments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE DegreeRequests SET FYPApproved = 1, FYPComments = @comments WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@comments", comments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update request. An error occurred: " + ex.Message);
+        }
+    }
+
+    //fyp department reject request function
+    public void RejectRequestFYP(string token, string comments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE DegreeRequests SET FYPApproved = 0, FYPComments = @comments WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@comments", comments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update request. An error occurred: " + ex.Message);
+        }
+    }
+
+    //finance department approve request function
+    public void ApproveRequestFinance(string token, string comments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE DegreeRequests SET FinanceApproved = 1, FinanceComments = @comments WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@comments", comments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update request. An error occurred: " + ex.Message);
+        }
+    }
+
+    //finance department reject request function
+    public void RejectRequestFinance(string token, string comments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE DegreeRequests SET FinanceApproved = 0, FinanceComments = @comments WHERE Token = @token", con))
+                {
+                    cmd.Parameters.AddWithValue("@token", token);
+                    cmd.Parameters.AddWithValue("@comments", comments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update request. An error occurred: " + ex.Message);
+        }
+    }
+
+    public bool UpdateComplaintStatus(int complaintID, string status, string AdminComments)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UPDATE StudentComplaints SET Status = @status, AdminComments = @AdminComments WHERE ComplaintID = @complaintID", con))
+                {
+                    cmd.Parameters.AddWithValue("@complaintID", complaintID);
+                    cmd.Parameters.AddWithValue("@status", status);
+                    cmd.Parameters.AddWithValue("@AdminComments", AdminComments);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt update complaint status. An error occurred: " + ex.Message);
+            return false;
+        }
+    }
+
+    public StudentComplaint GetComplaintDetails(int complaintID)
+    {
+        StudentComplaint complaint = new StudentComplaint(complaintID);
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM StudentComplaints WHERE ComplaintID = @complaintID", con))
+                {
+                    cmd.Parameters.AddWithValue("@complaintID", complaintID);
+
+                    con.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            complaint.ComplaintID = Convert.ToInt32(reader["ComplaintID"]);
+                            complaint.StudentID = Convert.ToInt32(reader["StudentID"]);
+                            complaint.Status = reader["Status"].ToString();
+                            complaint.Type = reader["Type"].ToString();
+                            complaint.Date = Convert.ToDateTime(reader["Date"]);
+                            complaint.ComplaintText = reader["ComplaintText"].ToString();
+                            complaint.AdminComments = reader["AdminComments"].ToString();
+                        }
+                    }
+                    con.Close();
+                    return complaint;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Couldnt get complaint details. An error occurred: " + ex.Message);
+            return null;
+        }
+    }
 }

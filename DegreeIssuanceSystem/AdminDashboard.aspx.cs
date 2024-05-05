@@ -18,7 +18,7 @@ public partial class AdminDashboard : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            Response.Write("<script>alert('An error occurred');</script>");
+            Response.Write("<script>alert('An error occurred. Please login again');</script>");
         }
 
         string useremail = Request.Cookies["userEmail"].Value;

@@ -21,7 +21,7 @@
         <asp:BoundField DataField="ComplaintText" HeaderText="ComplaintText" SortExpression="ComplaintText" />
         <asp:TemplateField HeaderText="Actions">
             <ItemTemplate>
-                <asp:Button ID="Button1" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Eval("ComplaintID") %>' CssClass="btn btn-dark btn-sm" />
+                <asp:Button ID="Button1" runat="server" Text="View Details" CommandName="ViewDetails" CommandArgument='<%# Eval("ComplaintID") + "," + Eval("StudentID") %>' CssClass="btn btn-dark btn-sm" />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>
