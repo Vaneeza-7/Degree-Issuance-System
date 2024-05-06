@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.6.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .sidebar {
             position: fixed;
@@ -67,16 +68,19 @@
                             <a class="nav-link" href="ManageComplaints.aspx">Manage Complaints</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Requests.aspx">Student Academic Records</a>
+                            <a class="nav-link" href="StudentAcademicRecord.aspx">Student Academic Records</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Requests.aspx">Issue Degree</a>
+                            <a class="nav-link" href="IssueDegree.aspx">Issue Degree</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="Requests.aspx">Issue Transcript</a>
+                            <a class="nav-link" href="IssueTranscript.aspx">Issue Transcript</a>
                         </li>
                          <li>
-                            <a class="nav-link" href="Requests.aspx">Logout</a>
+                            <a class="nav-link" href="GenerateChartAdmin.aspx">Generate Requests Report</a>
+                        </li>
+                         <li>
+                            <a class="nav-link" href="Default.aspx">Logout</a>
                         </li>
                         <!-- Add other navigation items if needed -->
                     </ul>

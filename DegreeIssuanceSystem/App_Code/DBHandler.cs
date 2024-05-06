@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.UI.WebControls;
 
 public class DBHandler
 {
@@ -213,6 +214,40 @@ public class DBHandler
         return studentInfo;
     }
 
+    public string[] GetDirectorInformation(string email)
+    {
+        string[] directorInfo = new string[4]; // Adjust the array size based on the number of fields to retrieve
+
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT Name, Address, DateOfJoining, DateOfRetirement FROM Directors WHERE Email = @Email", con))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        directorInfo[0] = reader["Name"].ToString();
+                        directorInfo[1] = reader["Address"].ToString();
+                        directorInfo[2] = reader["DateOfJoining"].ToString();
+                        directorInfo[3] = reader["DateOfRetirement"].ToString();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions
+        }
+
+        return directorInfo;
+    }
+
     public bool SubmitComplaintForm(string complaint)
     {
         try
@@ -244,6 +279,27 @@ public class DBHandler
         {
             SqlConnection con = new SqlConnection(connectionString);
             string query = "SELECT * FROM DegreeRequests";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            con.Open();
+            adapter.Fill(dt);
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            // Handle exception
+            Console.WriteLine(ex.Message);
+        }
+        return dt;
+    }
+
+    public DataTable GetApprovedRequests()
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            string query = "SELECT * FROM DegreeRequests WHERE AdminApproved = 1 AND FYPApproved = 1 AND FinanceApproved = 1";
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             con.Open();
@@ -515,6 +571,130 @@ public class DBHandler
         catch (Exception ex)
         {
             Console.WriteLine("Couldnt get complaint details. An error occurred: " + ex.Message);
+            return null;
+        }
+    }
+
+    public DataTable GetDegreeReport(int studentID)
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            SqlConnection con = new SqlConnection(connectionString);
+            string query = @"
+                SELECT 
+                    s.Name AS 'StudentName',
+                    s.RollNumber AS 'RollNumber',
+                    s.Degree AS 'DegreeName',
+                    d.DateOfIssuance AS 'DateOfIssuance',
+                    d.GraduatingCGPA AS 'CGPA',
+                    d.Signature
+                FROM 
+                    Students s
+                INNER JOIN 
+                    Degree d ON s.UserID = d.UserID
+                WHERE 
+                    s.UserID = @studentID";
+            SqlCommand cmd = new SqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@studentID", studentID);
+            con.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dt);
+            con.Close();
+            return dt;
+
+        }
+        catch (Exception ex)
+        {
+            // Handle exception
+            Console.WriteLine(ex.Message);
+            return null;
+        }
+
+    }
+
+    public DataTable GetTranscriptData(int studentID)
+    {
+        DataTable dt = new DataTable();
+            try
+            {
+                SqlConnection con = new SqlConnection(connectionString);
+                string query = @"
+            SELECT 
+                s.Name AS 'StudentName',
+                s.RollNumber AS 'RollNumber',
+                c.CourseID,
+                c.CourseName,
+                c.Grade,
+                sar.CGPA,
+                sar.CreditHours,
+                SUM(sar.CreditHours) OVER() AS 'TotalCreditHours',
+                d.Signature
+            FROM 
+                Students s
+            INNER JOIN 
+                StudentAcademicRecords sar ON s.UserID = sar.UserID
+            INNER JOIN 
+                Courses c ON sar.RecordID = c.RecordID
+            LEFT JOIN 
+                Degree d ON s.UserID = d.UserID
+            WHERE 
+                s.UserID = @studentID
+            ORDER BY 
+                c.CourseID;";
+
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@studentID", studentID);
+                con.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                con.Close();
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+    }
+
+    public DataTable GetStudentAcademicRecords(int userId)
+    {
+        DataTable dt = new DataTable();
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = @"
+                SELECT 
+                c.CourseID,
+                c.CourseName,
+                sar.RecordID,
+                sar.UserID,
+                c.Grade,
+                sar.CGPA,
+                sar.CreditHours
+            FROM 
+                Courses c
+            INNER JOIN 
+                StudentAcademicRecords sar ON c.RecordID = sar.RecordID
+            WHERE
+                sar.UserID = @userId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@userId", userId);
+                con.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                con.Close();
+                return dt;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exception
+            Console.WriteLine(ex.Message);
             return null;
         }
     }

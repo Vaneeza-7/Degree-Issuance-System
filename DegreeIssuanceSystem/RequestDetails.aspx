@@ -43,7 +43,7 @@
      <div class="row mb-2">
     <div class="col-md-3 font-weight-bold">Student Academic Record:</div>
     <div class="col-md-9">
-        <asp:HyperLink ID="academicLink" runat="server" Text="View Academic Record" NavigateUrl="~/AcademicRecordPage.aspx" />
+        <asp:HyperLink ID="academicLink" runat="server" Text="View Academic Record" NavigateUrl="~/StudentAcademicRecord.aspx" />
     </div>
 </div>
           </div>

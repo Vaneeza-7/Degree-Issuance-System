@@ -11,7 +11,8 @@ public partial class studentmainpage : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            string email = "student@example.com"; // You can get the email from session or any other source
+            //retrieve session variable
+            string email = Session["StudentEmail"].ToString();
             Student student = new Student();
             string[] studentInfo = student.GetStudentInformation(email);
 

@@ -63,8 +63,7 @@ public partial class RequestDetails : System.Web.UI.Page
 
     protected void btnViewAcademicRecord_Click(object sender, EventArgs e)
     {
-        // Redirect to a page that shows academic records
-        // Example: Response.Redirect($"AcademicRecords.aspx?studentId={studentId}");
+        Response.Redirect("StudentAcademicRecord.aspx");
     }
 
     protected void btnApprove_Click(object sender, EventArgs e)

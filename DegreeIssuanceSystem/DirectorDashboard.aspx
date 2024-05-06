@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="studentmainpage.aspx.cs" Inherits="studentmainpage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="DirectorDashboard.aspx.cs" Inherits="DirectorDashboard" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Dashboard</title>
+    <title>Director Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -86,19 +86,13 @@
                 <nav id="navigation" class="col-md-2">
                     <ul>
                         <li>
-                            <a href="studentmainpage.aspx">Home</a>
+                            <a href="DirectorDashboard.aspx">Home</a>
                         </li>
                         <li>
-                            <a href="complaintform.aspx">Complaint Form</a>
+                            <a href="MonitorRequests.aspx">Monitor Requests</a>
                         </li>
-                        <li>
-                            <a href="degreeissuanceform.aspx">Degree Issuance Form</a>
-                        </li>
-                        <li>
-                            <a href="#">Track Activity</a>
-                        </li>
-                        <li>
-                            <a href="#">Notifications</a>
+                                                <li>
+                            <a href="GenerateChart.aspx">Generate Request Report</a>
                         </li>
                         <li>
                             <a href="Default.aspx">Logout</a>
@@ -108,17 +102,17 @@
                 <main id="content" class="col-md-10">
                     <div class="section">
                         <h2>University Information</h2>
-                        <!-- Retrieve and display university information from database -->
                         <label>Name: Fast University</label><br />
                         <label>Contact No: +92 123 4567890</label><br />
                         <label>Address: H-8 Islamabad</label>
                     </div>
                     <div class="section boldish-font">
                         <h2>Personal Information</h2>
-                        <!-- Display student's personal information -->
+
                         <asp:Label ID="lblName" runat="server" Text="Name: "></asp:Label><br />
-                        <asp:Label ID="lblRollNumber" runat="server" Text="Roll Number: "></asp:Label><br />
-                        <asp:Label ID="lblDegree" runat="server" Text="Degree: "></asp:Label>
+                        <asp:Label ID="lblAddress" runat="server" Text="Address: "></asp:Label><br />
+                        <asp:Label ID="lbldoj" runat="server" Text="Date of Joining: "></asp:Label><br />
+                        <asp:Label ID="lbldor" runat="server" Text="Date of Retirement: "></asp:Label>
                     </div>
                     <div class="section boldish-font">
                         <h2>Contact Information</h2>

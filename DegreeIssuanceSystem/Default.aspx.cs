@@ -25,7 +25,7 @@ public partial class _Default :  System.Web.UI.Page
     protected void directorbtn_Click(object sender, EventArgs e)
     {
 
-        Response.Redirect("Login.aspx");
+        Response.Redirect("DirectorLogin.aspx");
     }
     protected void fypbtn_Click(object sender, EventArgs e)
     {
