@@ -327,7 +327,7 @@ VALUES
 (5200, 1900, 1600, 5),
 (5500, 2100, 1300, 6);
 
-
+select* from FinancialRecords
 -- Assuming UserIDs from 2 to 6 are valid
 INSERT INTO StudentAcademicRecords (UserID, CGPA, CreditHours)
 VALUES 
@@ -346,6 +346,50 @@ VALUES
 (4, 'Machine Learning', 'A'),
 (5, 'Database Systems', 'B'),
 (6, 'Operating Systems', 'A');
+
+-- Assuming RecordIDs from 2 to 6 are valid
+INSERT INTO Courses (RecordID, CourseName, Grade)
+VALUES 
+(2, 'Databases', 'A'),
+(3, 'Algorithms', 'B'),
+(4, 'Marketing Management', 'A'),
+(5, 'Artificial Intelligence', 'B'),
+(6, 'Data Structures', 'A');
+
+
+-- Assuming RecordIDs from 2 to 6 are valid
+INSERT INTO Courses (RecordID, CourseName, Grade)
+VALUES 
+(3, 'Databases', 'A'),
+(2, 'Algorithms', 'B'),
+(3, 'Marketing Management', 'A'),
+(3, 'Artificial Intelligence', 'B'),
+(3, 'Data Structures', 'A');
+
+INSERT INTO Courses (RecordID, CourseName, Grade)
+VALUES 
+(4, 'Databases', 'A'),
+(4, 'Algorithms', 'B'),
+(5, 'Marketing Management', 'A'),
+(4, 'Artificial Intelligence', 'B'),
+(4, 'Data Structures', 'A');
+
+INSERT INTO Courses (RecordID, CourseName, Grade)
+VALUES 
+(5, 'Software Engineering', 'A'),
+(5, 'Algorithms', 'B'),
+(5, 'Project Management', 'A'),
+(5, 'Deep Learning', 'B'),
+(5, 'Data Structures', 'A');
+
+INSERT INTO Courses (RecordID, CourseName, Grade)
+VALUES 
+(6, 'Software Engineering', 'A'),
+(6, 'Information Security', 'B'),
+(6, 'Project Management', 'A'),
+(6, 'Deep Learning', 'B'),
+(6, 'Object Oriented Programming', 'A');
+
 
 INSERT INTO ComplaintForm (Date, Status, Complaint)
 VALUES 
@@ -464,4 +508,80 @@ BEGIN
     AND i.Status <> 'Approved'; -- Prevent unnecessary updates
 END
 
--- select* from StudentAcademicRecords r inner join Courses c on r.RecordID=c.RecordID
+---UPDATE THIS AND INSERTIONS IN COURSES AND ACADEMIC RECORDS TABLE 5/7/2024
+INSERT INTO Degree (DateOfIssuance, GraduatingCGPA, Signature, UserID)
+VALUES
+  (GETDATE(), 3.8, 'John Smith', 2),
+  (GETDATE(), 3.7, 'John Smith', 3),
+  (GETDATE(), 3.9, 'John Smith', 4),
+  (GETDATE(), 3.5, 'John Smith', 5),
+  (GETDATE(), 3.8, 'John Smith', 6);
+
+--  select* from Transcript
+
+--SELECT  s.Name AS 'StudentName', s.RollNumber AS 'RollNumber', s.Degree AS 'DegreeName',
+--d.DateOfIssuance AS 'DateOfIssuance', d.GraduatingCGPA AS 'CGPA', d.Signature
+--FROM Students s INNER JOIN Degree d ON s.UserID = d.UserID where s.UserID=2
+
+--select* from Courses
+--select* from StudentAcademicRecords
+
+--SELECT
+--    c.CourseID,
+--    c.CourseName,
+--    sar.RecordID,
+--    sar.UserID,
+--    c.Grade,
+--    sar.CGPA,
+--    sar.CreditHours
+--FROM
+--    Courses c
+--INNER JOIN
+--    StudentAcademicRecords sar ON c.RecordID = sar.RecordID
+--WHERE
+--    sar.UserID = 1; -- Change this to any specific UserID
+
+
+--SELECT 
+--    s.Name AS 'StudentName',
+--    s.RollNumber AS 'RollNumber',
+--    c.CourseID,
+--    c.CourseName,
+--    c.Grade,
+--    sar.CGPA,
+--    sar.CreditHours,
+--    SUM(sar.CreditHours) OVER() AS 'TotalCreditHours',
+--    d.Signature
+--FROM 
+--    Students s
+--INNER JOIN 
+--    StudentAcademicRecords sar ON s.UserID = sar.UserID
+--INNER JOIN 
+--    Courses c ON sar.RecordID = c.RecordID
+--LEFT JOIN 
+--    Degree d ON s.UserID = d.UserID
+--WHERE 
+--    s.UserID = 1
+--ORDER BY 
+--    c.CourseID;
+--select* from Courses
+
+--select r.RecordID, r.UserID as 'Student ID', r.CGPA, r.CreditHours, c.CourseID, c.CourseName,
+--c.Grade from StudentAcademicRecords r inner join Courses c on r.RecordID=c.RecordID where r.UserID=1
+
+ --SELECT 
+ --    c.CourseID,
+ --    c.CourseName,
+ --    sar.RecordID,
+ --    sar.UserID,
+ --    c.Grade,
+ --    sar.CGPA,
+ --    sar.CreditHours
+ --FROM 
+ --    Courses c
+ --INNER JOIN 
+ --    StudentAcademicRecords sar ON c.RecordID = sar.RecordID
+ --WHERE
+ --    sar.UserID =1
+
+	-- SELECT Name, Address, DateOfJoining, DateOfRetirement FROM Directors
