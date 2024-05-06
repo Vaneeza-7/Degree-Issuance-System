@@ -413,6 +413,7 @@ VALUES
 
 select* from DegreeRequests
 
+----	UPDATE TABLES
 alter table DegreeRequests
 add AdminComments VARCHAR(100)
 
@@ -424,3 +425,43 @@ add FinanceComments VARCHAR(100)
 
 select* from DegreeRequests
 
+----	UPDATE ON 5/5/2024
+alter table StudentComplaints
+add AdminComments VARCHAR(300)
+
+GO
+CREATE TRIGGER trg_UpdateStatusAfterInsert
+ON DegreeRequests
+AFTER INSERT
+AS
+BEGIN
+    -- Update Status to "Approved" if all three approvals are 1
+    UPDATE DegreeRequests
+    SET Status = 'Approved'
+    FROM DegreeRequests dr
+    INNER JOIN inserted i
+    ON dr.Token = i.Token  -- Using Token as the joining key
+    WHERE i.AdminApproved = 1
+    AND i.FYPApproved = 1
+    AND i.FinanceApproved = 1;
+END
+
+GO
+CREATE TRIGGER trg_UpdateStatusAfterUpdate
+ON DegreeRequests
+AFTER UPDATE
+AS
+BEGIN
+    -- Update Status to "Approved" if all three approvals are 1
+    UPDATE DegreeRequests
+    SET Status = 'Approved'
+    FROM DegreeRequests dr
+    INNER JOIN inserted i
+    ON dr.Token = i.Token  -- Using Token as the joining key
+    WHERE i.AdminApproved = 1
+    AND i.FYPApproved = 1
+    AND i.FinanceApproved = 1
+    AND i.Status <> 'Approved'; -- Prevent unnecessary updates
+END
+
+-- select* from StudentAcademicRecords r inner join Courses c on r.RecordID=c.RecordID
