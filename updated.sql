@@ -127,7 +127,7 @@ CREATE TABLE StudentComplaints (
     FOREIGN KEY (StudentID) REFERENCES Students(UserID)
 );
 
-
+select* from Notifications
 -- Notification Table
 CREATE TABLE Notifications (
     NotificationID INT PRIMARY KEY IDENTITY(1,1),
@@ -517,6 +517,13 @@ VALUES
   (GETDATE(), 3.5, 'John Smith', 5),
   (GETDATE(), 3.8, 'John Smith', 6);
 
+insert into FYP values ('Time table scheduling using genetic algorithm', 'Artificial Intelligence', 'Dr.Which', 'B', 2);
+insert into FYP values ('Sentiment Analysis', 'Natural Language Processing', 'Dr.Whom', 'A+', 3);
+insert into FYP values ('Line Following Robot', 'Robotics','Dr.Why', 'B+', 4);
+insert into FYP values ('Tumor Detection using OpenCV', 'Digital Image Prcoessing','Dr.What', 'B+', 5);
+insert into FYP values ('Training Arena in Virtual Reality', 'AR/VR Technology', 'Dr.When', 'A', 6);
+
+
 --  select* from Transcript
 
 --SELECT  s.Name AS 'StudentName', s.RollNumber AS 'RollNumber', s.Degree AS 'DegreeName',
@@ -585,3 +592,4 @@ VALUES
  --    sar.UserID =1
 
 	-- SELECT Name, Address, DateOfJoining, DateOfRetirement FROM Directors
+	select* from Notifications
