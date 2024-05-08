@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="complaintform.aspx.cs" Inherits="projectse.complaintform" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="complaintform.aspx.cs" Inherits="complaintform" %>
 
 <!DOCTYPE html>
 
@@ -117,13 +117,13 @@
                             <a href="degreeissuanceform.aspx">Degree Issuance Form</a>
                         </li>
                         <li>
-                            <a href="#">Track Activity</a>
+                            <a href="TrackActivity.aspx">Track Activity</a>
                         </li>
                         <li>
-                            <a href="#">Notifications</a>
+                            <a href="trackNotifications.aspx">Notifications</a>
                         </li>
                         <li>
-                            <a href="#">Logout</a>
+                            <a href="Default.aspx">Logout</a>
                         </li>
                     </ul>
                 </nav>
@@ -132,21 +132,25 @@
                         <h2>Complaint Form</h2>
                         <div class="form-group">
                             <label for="txtName">Name:</label>
-                            <input type="text" id="txtName" name="txtName" placeholder="Enter your name">
+                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Enter your name"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <label for="txtRollNo">Roll No:</label>
-                            <input type="text" id="txtRollNo" name="txtRollNo" placeholder="Enter your roll number">
+                            <asp:TextBox ID="txtRollNo" runat="server" CssClass="form-control" placeholder="Enter your roll number"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <label for="txtDate">Date:</label>
-                            <input type="text" id="txtDate" name="txtDate" placeholder="Enter the date">
+                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" placeholder="Enter the date"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtType">Complaint Type:</label>
+                            <asp:TextBox ID="txtType" runat="server" CssClass="form-control" placeholder="Technical/Academic/Facility"></asp:TextBox>
                         </div>
                         <div class="form-group">
                             <label for="txtComplaint">Complaint:</label>
-                            <textarea id="txtComplaint" name="txtComplaint" rows="6" placeholder="Enter your complaint"></textarea>
+                            <asp:TextBox ID="txtComplaint" runat="server" TextMode="MultiLine" Rows="6" CssClass="form-control" placeholder="Enter your complaint"></asp:TextBox>
                         </div>
-                        <button type="submit" class="btn-submit">Submit</button>
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-submit" OnClick="btnSubmit_Click" />
                     </div>
                 </main>
             </div>

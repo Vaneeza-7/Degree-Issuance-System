@@ -33,8 +33,13 @@ public partial class IssueDegree : System.Web.UI.Page
                 string token = args[0];
                 string studentId = args[1];
 
+                DBHandler dataAccess = new DBHandler();
+                int student;
+                int.TryParse(studentId, out student);
+                dataAccess.sendNotification(student, "Your degree has been generated. Ready for collection 🎉🎉");
                 // Response.Redirect($"RequestDetails.aspx?token={token}&studentId={studentId}");
                 Response.Redirect(string.Format("DegreeReport.aspx?token={0}&studentId={1}", token, studentId));
+
             }
         }
     }

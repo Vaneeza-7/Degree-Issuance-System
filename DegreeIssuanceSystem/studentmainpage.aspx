@@ -95,10 +95,10 @@
                             <a href="degreeissuanceform.aspx">Degree Issuance Form</a>
                         </li>
                         <li>
-                            <a href="#">Track Activity</a>
+                            <a href="TrackActivity.aspx">Track Activity</a>
                         </li>
                         <li>
-                            <a href="#">Notifications</a>
+                            <a href="trackNotifications.aspx">Notifications</a>
                         </li>
                         <li>
                             <a href="Default.aspx">Logout</a>

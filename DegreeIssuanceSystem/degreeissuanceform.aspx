@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="degreeissuanceform.aspx.cs" Inherits="projectse.degreeissuanceform" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="degreeissuanceform.aspx.cs" Inherits="degreeissuanceform" %>
 
 <!DOCTYPE html>
 
@@ -124,22 +124,23 @@
                             <a href="complaintform.aspx">Complaint Form</a>
                         </li>
                         <li>
-                            <a href="#">Degree Issuance Form</a>
+                            <a href="degreeissuanceform.aspx">Degree Issuance Form</a>
                         </li>
                         <li>
-                            <a href="#">Track Activity</a>
+                            <a href="TrackActivity.aspx">Track Activity</a>
                         </li>
                         <li>
-                            <a href="#">Notifications</a>
+                            <a href="trackNotifications.aspx">Notifications</a>
                         </li>
                         <li>
-                            <a href="studentlogin.aspx">Logout</a>
+                            <a href="Default.aspx">Logout</a>
                         </li>
                     </ul>
                 </nav>
                 <main id="content" class="col-md-10">
                     <div class="section">
                         <h2>Degree Issuance Request</h2>
+                        <asp:Label ID="lblMessage" runat="server" Text="" />
                         <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="text" id="name" name="name" required />
@@ -165,7 +166,7 @@
                             <label for="additionalInfo">Additional Information:</label>
                             <textarea id="additionalInfo" name="additionalInfo" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn-submit">Submit</button>
+                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn-submit" Text="Submit" OnClick="SubmitForm" />
                     </div>
                 </main>
             </div>

@@ -26,6 +26,10 @@ public partial class studentlogin : System.Web.UI.Page
             // Save email as a session variable upon successful login
             Session["StudentEmail"] = email;
 
+            //create cookie for student email.
+            HttpCookie StudentEmailCookie = new HttpCookie("StudentEmail", email);
+            Response.Cookies.Add(StudentEmailCookie);
+
             // Redirect to the home page upon successful login
             Response.Redirect("studentmainpage.aspx");
         }

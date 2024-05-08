@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class RequestDetails : System.Web.UI.Page
 {
+    int studentId;
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -25,7 +26,7 @@ public partial class RequestDetails : System.Web.UI.Page
         {
             string token = Request.QueryString["token"];
             string studentIdString = Request.QueryString["studentId"];
-            int studentId = int.TryParse(studentIdString, out studentId) ? studentId : 0;
+            studentId = int.TryParse(studentIdString, out studentId) ? studentId : 0;
             if (!string.IsNullOrEmpty(token))
             {
                 lblToken.Text = token;
@@ -73,6 +74,8 @@ public partial class RequestDetails : System.Web.UI.Page
         AdminClass admin = new AdminClass(useremail, userpwd);
         string comments = txtComments.Text;
         admin.ApproveRequest(lblToken.Text, comments);
+        DBHandler handler = new DBHandler();
+        handler.sendNotification(studentId, "Your request has been approved by admin.");
         Response.Redirect("ManageRequests.aspx");
     }
 
@@ -83,6 +86,8 @@ public partial class RequestDetails : System.Web.UI.Page
         AdminClass admin = new AdminClass(useremail, userpwd);
         string comments = txtComments.Text;
         admin.RejectRequest(lblToken.Text, comments);
+        DBHandler handler = new DBHandler();
+        handler.sendNotification(studentId, "Your request has been rejected by admin.");
         Response.Redirect("ManageRequests.aspx");
 
     }

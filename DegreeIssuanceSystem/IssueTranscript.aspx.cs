@@ -33,6 +33,10 @@ public partial class IssueTranscript : System.Web.UI.Page
                 string token = args[0];
                 string studentId = args[1];
 
+                DBHandler dataAccess = new DBHandler();
+                int student;
+                int.TryParse(studentId, out student);
+                dataAccess.sendNotification(student, "Your transcript is ready for collection 🎉");
                 // Response.Redirect($"RequestDetails.aspx?token={token}&studentId={studentId}");
                 Response.Redirect(string.Format("TranscriptReport.aspx?token={0}&studentId={1}", token, studentId));
             }

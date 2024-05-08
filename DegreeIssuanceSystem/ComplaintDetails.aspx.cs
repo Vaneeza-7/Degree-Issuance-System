@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class ComplaintDetails : System.Web.UI.Page
 {
+    int studentID;
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -25,6 +26,7 @@ public partial class ComplaintDetails : System.Web.UI.Page
         {
             string complaintID = Request.QueryString["complaintID"];
             string studentIdString = Request.QueryString["StudentID"];
+            studentID = int.Parse(studentIdString);
             int complaintIDInt = int.TryParse(complaintID, out complaintIDInt) ? complaintIDInt : 0;
             if (!string.IsNullOrEmpty(complaintID))
             {
@@ -66,6 +68,8 @@ public partial class ComplaintDetails : System.Web.UI.Page
         bool result = complaint.UpdateStatus(complaintID, status, adminComments);
         if (result)
         {
+            DBHandler handler = new DBHandler();
+            handler.sendNotification(studentID, "Admin has processed your complaint.");
             Response.Write("<script>alert('Complaint updated successfully');</script>");
             Response.Redirect("ManageComplaints.aspx");
         }

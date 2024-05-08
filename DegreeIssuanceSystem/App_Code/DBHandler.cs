@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 public class DBHandler
 {
@@ -248,18 +249,41 @@ public class DBHandler
         return directorInfo;
     }
 
-    public bool SubmitComplaintForm(string complaint)
+    public bool SubmitComplaintForm(string email, DateTime date, string type, string complaint)
     {
         try
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO ComplaintForm (Date, Status, Complaint) VALUES (GETDATE(), 'Open', @Complaint)", con))
+                // First, retrieve the StudentID based on the email
+                int studentId;
+                using (SqlCommand cmdGetStudentId = new SqlCommand("SELECT UserID AS StudentID FROM Students WHERE email = @Email", con))
                 {
+                    cmdGetStudentId.Parameters.AddWithValue("@Email", email);
+
+                    con.Open();
+                    object result = cmdGetStudentId.ExecuteScalar();
+                    con.Close();
+
+                    if (result == null)
+                    {
+                        return false;
+                    }
+
+                    studentId = Convert.ToInt32(result);
+                }
+                sendNotification(studentId, "Your complaint has been submitted.");
+
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO studentcomplaints (StudentID, Status, Type, Date, ComplaintText, AdminComments) VALUES (@StudentID, 'Open', @Type, @Date, @Complaint, NULL)", con))
+                {
+                    cmd.Parameters.AddWithValue("@StudentID", studentId);
+                    cmd.Parameters.AddWithValue("@Type", type);
+                    cmd.Parameters.AddWithValue("@Date", date);
                     cmd.Parameters.AddWithValue("@Complaint", complaint);
 
                     con.Open();
                     int rowsAffected = cmd.ExecuteNonQuery();
+                    con.Close();
 
                     return rowsAffected > 0;
                 }
@@ -267,7 +291,51 @@ public class DBHandler
         }
         catch (Exception ex)
         {
-            // Handle exceptions
+             Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
+
+    public bool SubmitDegreeRequest(string email, DateTime date)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                // First, retrieve the StudentID based on the email
+                int studentId;
+                using (SqlCommand cmdGetStudentId = new SqlCommand("SELECT UserID AS StudentID FROM Students WHERE email = @Email", con))
+                {
+                    cmdGetStudentId.Parameters.AddWithValue("@Email", email);
+
+                    con.Open();
+                    object result = cmdGetStudentId.ExecuteScalar();
+                    con.Close();
+
+                    if (result == null)
+                    {
+                        return false;
+                    }
+
+                    studentId = Convert.ToInt32(result);
+                }
+
+                sendNotification(studentId, "Your degree request has been submitted.");
+
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO DegreeRequests (DateReceived, Status, AdminApproved, FYPApproved, FinanceApproved, UserID, AdminComments, FYPComments, FinanceComments) VALUES (@DateReceived, 'Pending', 0, 0, 0, @StudentID, NULL, NULL, NULL)", con))
+                {
+                    cmd.Parameters.AddWithValue("@StudentID", studentId);
+                    cmd.Parameters.AddWithValue("@DateReceived", date);
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    con.Close();
+                    return rowsAffected > 0;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
             return false;
         }
     }
@@ -572,6 +640,36 @@ public class DBHandler
         {
             Console.WriteLine("Couldnt get complaint details. An error occurred: " + ex.Message);
             return null;
+        }
+    }
+
+    public bool sendNotification(int receiverID, string text)
+    {
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = "INSERT INTO Notifications (ReceiverID, Text, Date) VALUES (@ReceiverID, @Text, @Date)";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@ReceiverID", receiverID);
+                    cmd.Parameters.AddWithValue("@Text", text);
+                    cmd.Parameters.AddWithValue("@Date", DateTime.Now);
+
+                    con.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    return rowsAffected > 0;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions (log them, etc.)
+            Console.WriteLine(ex.Message);
+            return false;
         }
     }
 
