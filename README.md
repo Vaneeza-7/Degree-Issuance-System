@@ -9,6 +9,7 @@ One Stop Degree Issuance System. Project @ Software Engineering
 - [Installation and Setup](#installation-and-setup)
 - [Requirements](#requirements)
 - [Documentation](#documentation)
+- [UI Screenshots](#ui-screenshots)
 - [Contributing](#contributing)
 - [Authors](#authors)
 - [License](#license)
@@ -69,6 +70,18 @@ To set up the Degree Issuance System on your local machine, follow these steps:
 ## Documentation
 
 The repository includes all necessary documentation, sprint charts, reports, and Software Requirements Specification (SRS) to help you understand the project and its development process. These documents can be found in the `iteration docs` folder and `SRS` folder.
+
+## UI Screenshots
+![homePage](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/homePage.png)
+![ComplaintForm](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/complaintform.png)
+![degreeRequest](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/degreeRequest.png)
+![notification](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/notifications.png)
+![academicRecords](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/academic_records.png)
+![reports](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/report.png)
+![activityTracking](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/trackActivity.png)
+![manage_requests](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/manage_requests.png)
+![transcript](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/transcript_generated.png)
+![login](https://github.com/Vaneeza-7/Degree-Issuance-System/blob/main/Screenshots/login.png)
 
 ## Contributing
 
